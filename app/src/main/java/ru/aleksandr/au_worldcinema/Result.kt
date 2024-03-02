@@ -1,10 +1,14 @@
 package ru.aleksandr.au_worldcinema
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import retrofit2.Call
+import retrofit2.Response
 import ru.aleksandr.au_worldcinema.databinding.ActivityResultBinding
 
 
@@ -13,6 +17,7 @@ class Result : AppCompatActivity() {
     lateinit var preff: SharedPreferences
     private lateinit var data1: SharedPreferences
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_result)
@@ -35,10 +40,31 @@ class Result : AppCompatActivity() {
             finish()
             System.out.close()
         }
-        Glide.with(this).load("https://i.playground.ru/p/fc-1eRRfl-PC8tSdjRWn-A.png").into(binding.imageView4)
+//        val ret1 = RetrofitClass().getRetrofit()
+//        val inter = ret1.create(RetrofitInterface::class.java)
+//        val retr_call: Call<RetrofitDataclassPong> = inter.getOtvet()
+//        retr_call.enqueue(object :retrofit2.Callback<RetrofitDataclassPong>
+//        {
+//            override fun onResponse(
+//                call: Call<RetrofitDataclassPong>,
+//                response: Response<RetrofitDataclassPong>
+//            ) {
+//                if (response.isSuccessful) {
+                    binding.textViewEmail.text = "Email: $EmailAPI"
+                    binding.textViewId.text = "id: $IdAPI"
+                    binding.textViewToken.text = "Токен: $TokenAPI"
+                    binding.textViewNickName.text = "Ник: $NickNameAPI"
+//                }
+//            }
+//            override fun onFailure(call: Call<RetrofitDataclassPong>, t: Throwable) {
+//                Toast.makeText(this@Result, "FSDFDSF", Toast.LENGTH_SHORT).show()
+//            }
+//
+//        }
+//        )
 
-
-
+            Glide.with(this).load(AvatarAPI).into(binding.imageViewAvatar)
+            Glide.with(this).load("https://i.playground.ru/p/fc-1eRRfl-PC8tSdjRWn-A.png").into(binding.imageView4)
     }
 }
 

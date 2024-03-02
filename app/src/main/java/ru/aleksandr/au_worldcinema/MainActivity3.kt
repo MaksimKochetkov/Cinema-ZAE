@@ -20,6 +20,11 @@ import ru.aleksandr.au_worldcinema.databinding.ActivityMain2Binding
 import ru.aleksandr.au_worldcinema.databinding.ActivityMain3Binding
 import ru.aleksandr.au_worldcinema.databinding.ActivityResultBinding
 
+var TokenAPI:String=""
+var IdAPI:String=""
+var NickNameAPI:String=""
+var AvatarAPI:String=""
+var EmailAPI:String=""
 class MainActivity3 : AppCompatActivity() {
     private lateinit var preff: SharedPreferences
     private lateinit var binding: ActivityMain3Binding
@@ -64,6 +69,11 @@ class MainActivity3 : AppCompatActivity() {
                 log_call.enqueue(object: retrofit2.Callback<RetrofitDataclass> {
                     override fun onResponse(call: Call<RetrofitDataclass>, response: Response<RetrofitDataclass>) {
                         if (response.isSuccessful) {
+                            TokenAPI = response.body()?.token.toString()
+                            EmailAPI = response.body()?.email.toString()
+                            NickNameAPI = response.body()?.nickName.toString()
+                            AvatarAPI = response.body()?.avatar.toString()
+                            IdAPI = response.body()?.id.toString()
                             val inte = Intent(this@MainActivity3, Result::class.java)
                             startActivity(inte)
                             finish()
